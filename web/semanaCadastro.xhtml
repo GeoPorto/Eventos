@@ -1,0 +1,64 @@
+<ui:composition template="/WEB-INF/template/generico.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="corpo">
+        <center>
+            <div class="divcadastro">
+                <br/>
+                <strong> <h:outputLabel style="font-family: Arial" value="Cadastrar Semana"/> </strong>
+
+                <hr/>
+                <br/>
+
+                <h:form id="formulario">
+
+                    <center>
+                        <table cellspacing = "10">
+
+                            <tr>
+                                <td><p:outputLabel value="Sigla:"/></td>
+                                <td><p:inputText id="sigla" value="#{semanaBean.semana.sigla}" maxlength="10" required="true"/></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel value="Nome:"/></td>
+                                <td><p:inputText id="nome" value="#{semanaBean.semana.nome}" maxlength="100" required="true"/></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel value="Local:"/></td>
+                                <td><p:inputText id="local" value="#{semanaBean.semana.local}" maxlength="100" required="true"/></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel value="Inicio:"/></td>
+                                <td><p:datePicker id="inicio" value="#{semanaBean.semana.inicio}" pattern="dd/MM/yyyy" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel value="Termino:"/></td>
+                                <td><p:datePicker id="termino" value="#{semanaBean.semana.termino}" pattern="dd/MM/yyyy" /></td>
+                            </tr>
+
+                        </table>
+                    </center>
+                    <br/>
+                    <p:commandButton ajax="false" value="Cadastrar"  
+                                     action="#{semanaBean.adicionar()}"
+                                     styleClass="ui-button-success"
+                                     update="formulario"/>
+                    <tr/>
+                    <p:commandButton ajax="false" value="Limpar" 
+                                     action="#{semanaBean.cancelar()}"
+                                     styleClass="ui-button-warning"
+                                     update="formulario"/>
+
+
+
+                </h:form>
+
+            </div>
+        </center>
+
+    </ui:define>
+</ui:composition>

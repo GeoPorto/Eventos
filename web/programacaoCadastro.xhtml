@@ -1,0 +1,73 @@
+<ui:composition template="/WEB-INF/template/generico.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="corpo">
+        <center>
+            <div class="divcadastro">
+                <br/>
+                <strong> <h:outputLabel style="font-family: Arial" value="Cadastrar Programação"/> </strong>
+
+                <hr/>
+                <br/>
+
+                <h:form id="formulario">
+
+                    <center>
+                        <table cellspacing = "10">
+
+                            <tr>
+                                <td><p:outputLabel value="Nome:"/></td>
+                                <td><p:inputText id="nome" value="#{programacaoBean.programacao.nome}" maxlength="100" required="true"/></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel value="Local:"/></td>
+                                <td><p:inputText id="local" value="#{programacaoBean.programacao.local}" maxlength="45" required="true"/></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel value="Carga Horária:"/></td>
+                                <td><p:inputNumber id="ch" value="#{programacaoBean.programacao.ch}" minValue="1" decimalPlaces="0" required="true"/></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel value="Vagas:"/></td>
+                                <td><p:inputNumber id="vagas" value="#{programacaoBean.programacao.qtdevagas}" minValue="1" decimalPlaces="0" required="true"/></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel value="Semana:"/></td>
+                                <td><p:selectOneMenu value="#{programacaoBean.semana}"
+                                 converter="semanaConverter">
+                                <f:selectItems value="#{semanaBean.findAll()}"/>
+                                </p:selectOneMenu></td>
+                            </tr>
+                            <tr>
+                                <td><p:outputLabel value="Ministrante:"/></td>
+                                <td><p:selectOneMenu value="#{programacaoBean.ministrante}"
+                                converter="ministranteConverter">
+                                <f:selectItems value="#{ministranteBean.findAll()}"/>
+                                </p:selectOneMenu></td>
+                            </tr>
+                        </table>
+                    </center>
+                    <br/>
+                    <p:commandButton ajax="false" value="Cadastrar"  
+                                     action="#{programacaoBean.adicionar()}"
+                                     styleClass="ui-button-success"
+                                     update="formulario"/>
+                    <tr/>
+                    <p:commandButton ajax="false" value="Limpar" 
+                                     action="#{programacaoBean.cancelar()}"
+                                     styleClass="ui-button-warning"
+                                     update="formulario"/>
+
+
+
+                </h:form>
+
+            </div>
+        </center>
+
+    </ui:define>
+</ui:composition>

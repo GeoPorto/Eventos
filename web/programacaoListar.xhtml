@@ -1,0 +1,70 @@
+<ui:composition template="/WEB-INF/template/generico.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="corpo">
+
+        <center>
+            <div class="divlistar">
+
+                <h1 style="font-family: Arial" ><strong>Programação</strong></h1>
+
+                <h:form>
+                    <center>
+                        <div class="div2listar">
+                            <p:dataTable  var="programacao"  value="#{programacaoBean.listaProgramacao}" rowKey="#{programacao.id}"
+                                          id="tabela" 
+                                          rows="5"
+                                          paginator="true"
+                                          paginatorPosition="bottom"
+                                          >
+                                <p:column headerText="Id" width="5%" >
+                                    <h:outputText value="#{programacao.id}" />
+                                </p:column>
+                                <p:column headerText="Carga Horária" width="5%">
+                                    <h:outputText value="#{programacao.ch}" />
+                                </p:column>
+                                <p:column headerText="Local" >
+                                    <h:outputText value="#{programacao.local}" />
+                                </p:column>
+                                <p:column headerText="Nome" >
+                                    <h:outputText value="#{programacao.nome}" />
+                                </p:column>
+                                <p:column headerText="Matriculas"  >
+                                    <h:outputText value="#{programacao.qtdematriculados}" />
+                                </p:column>
+                                <p:column headerText="Vagas" width="5%" >
+                                    <h:outputText value="#{programacao.qtdevagas}" />
+                                </p:column>
+                                <p:column headerText="Status" >
+                                    <h:outputText value="#{programacao.status}" />
+                                </p:column>
+                                <p:column headerText="Ministrante" >
+                                    <h:outputText value="#{programacao.idministrante.nome}" />
+                                </p:column>
+
+                                <p:column headerText="" width="15%">
+                                    <p:commandButton ajax="false" value="Inscrever-se" 
+                                                     action="#{loginBean.inscrever(programacao)}"
+                                                     update="formulario"
+                                                     styleClass="ui-button-success"
+                                                     rendered="#{not loginBean.adm and loginBean.islogado}"
+                                                     />
+
+                                </p:column>
+                            </p:dataTable>
+
+                        </div>
+                    </center>
+                    <p:commandButton ajax="false" value="Meus Eventos" styleClass="ui-button-success" 
+                                     action="listarEventosAluno.xhtml" rendered="#{not loginBean.adm and loginBean.islogado}"/>
+                </h:form>
+
+            </div>
+        </center>
+
+    </ui:define>
+</ui:composition>

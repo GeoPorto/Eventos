@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+       <link href="resources/css/login.css" rel="stylesheet" type="text/css"/>
+        <title>Eventos</title>
+    </h:head>
+    <h:body >
+
+        <h:form id="geral">
+
+            <h:form>
+                <p:menubar >
+                    
+                        <p:graphicImage library="imagem" name="IFSP.png" width="30" height="30" />
+                        
+                    
+                    <p:menuitem value="Inicio" icon="pi pi-fw pi-home" outcome="paginaInicial.xhtml?faces-redirect=true"/>
+                    <p:divider layout="vertical"/>
+                    <p:menuitem value="Programação" icon="pi pi-fw pi-calendar" outcome="programacaoListar.xhtml?faces-redirect=true"/>
+                    <p:menuitem value="Cadastrar-se" rendered="#{not loginBean.islogado}" icon="pi pi-fw pi-user-plus" outcome="alunoCadastro.xhtml?faces-redirect=true"/>
+                    <p:submenu  id="submenu" rendered="#{loginBean.adm}" label="Semanas" icon="pi pi-fw pi-users">
+                        <p:menuitem  value="Cadastrar Semana" icon="pi pi-fw pi-calendar-plus" outcome="semanaCadastro.xhtml?faces-redirect=true" />
+                        <p:menuitem  value="Programação" icon="pi pi-fw pi-plus" outcome="programacaoCadastro.xhtml?faces-redirect=true" />
+                        <p:menuitem  value="Ministrantes" icon="pi pi-fw pi-user" outcome="ministranteListar.xhtml?faces-redirect=true"/>
+                        <p:menuitem  value="Alunos" icon="pi pi-fw pi-users" outcome="alunoListar.xhtml?faces-redirect=true" />
+                    </p:submenu>
+                    <f:facet name="options">      
+                        <p:commandButton ajax="false" value="#{loginBean.islogado ? 'Deslogar' : 'Logar'}" icon="pi pi-fw pi-sign-out" 
+                                         action="#{loginBean.logarOuDeslogar()}" styleClass="ui-button-secondary ui-button-flat" />
+                    </f:facet>
+                </p:menubar>
+            </h:form>
+
+            <p:messages></p:messages>
+
+        </h:form>
+
+        <ui:insert name="corpo"/>
+
+    </h:body>
+</html>
